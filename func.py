@@ -25,7 +25,9 @@ class Category:
     quantity_of_categories = 0  # счетчик категорий
     own_products = set()  # счетчик уникальных продуктов
 
-    def __init__(self, name, description):
+
+
+    def __init__(self, name, description, products):
         self.name = name
         self.description = description
         self.__products = []  # список продуктов делаем приватным
@@ -121,6 +123,7 @@ class Product:
         else:
             self.__price = new_price
 
+
     class CategoryIter:
 
         def __init__(self, category: Category):
@@ -144,5 +147,6 @@ class Product:
     product1 = Product(name: "Продукт2", description: "йцукен", price: 12000, quantity: 2)
     category.add_products(product1)
     category.add_products(product)
+
 
 

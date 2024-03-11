@@ -58,3 +58,7 @@ def test_init_2(test_init_product):
     assert test_init_product.price == 180000.0
     assert test_init_product.quantity == 5
     assert test_init_product.quantity_of_product == 1
+
+
+
+
