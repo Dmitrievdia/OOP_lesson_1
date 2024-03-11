@@ -144,6 +144,5 @@ class Product:
     product1 = Product(name: "Продукт2", description: "йцукен", price: 12000, quantity: 2)
     category.add_products(product1)
     category.add_products(product)
-    print()
 
 
