@@ -1,16 +1,18 @@
 import json
+from typing import List, Any
 
-get_data_products = "products.json"
 
-
-def load_data_products():
-    """
-    функция выводит список словарей продуктов:
-    :return:list
-    """
-    # with open(get_data_products, "rt", encoding="utf-8") as file:
-    #     data_products = json.load(file)
-    # return data_products
+# get_data_products = "products.json"
+#
+#
+# def load_data_products():
+#     """
+#     функция выводит список словарей продуктов:
+#     :return:list
+#     """
+# with open(get_data_products, "rt", encoding="utf-8") as file:
+#     data_products = json.load(file)
+# return data_products
 # print(load_data_products())
 
 
@@ -20,28 +22,127 @@ class Category:
     name: str  # название категории
     description: str  # описание категории
     products: list  # товары
-    quantity_of_categories = 0
-    own_products = set()
+    quantity_of_categories = 0  # счетчик категорий
+    own_products = set()  # счетчик уникальных продуктов
 
-    def __init__(self, name, description, products):
+    def __init__(self, name, description):
         self.name = name
         self.description = description
-        self.products = products
+        self.__products = []  # список продуктов делаем приватным
         Category.quantity_of_categories += 1
-        Category.own_products.union(set(products))
+        Category.own_products += len(self.__products)
+
+    def add_products(self, product):
+        """
+        функция добавления продукта в список
+        :param product: str (Samsung s-23)
+        :return: list ['Samsung s-23']
+        """
+        self.__products.append(product)
+
+
+    @property
+    def display(self):
+        """
+        функция возвращает список продуктов
+        :return: list ['Samsung s-23']
+        """
+        return self.__products
+
+    @property
+    def counting_products(self):
+        """
+        функция возвращает количество товаров
+        :return: int
+        """
+        return len(self.__products)
+
+    def __repr__(self):
+        """
+        функция возвращает список товаров в формате:
+        Продукт, цена, остаток.
+        :return: str
+        """
+        return f'{self.name}, {self.description}, {self.__products}'
+
+    @property
+    def get_products(self):
+        """
+        функция выводит список товаров в формате:
+        Продукт, 80 руб. Остаток: 15 шт.
+        :return:
+        """
+        result = ''
+        for product in self.__products:
+            result += f'\n{product.name},{product.price}руб. Остаток: {product.quantity} шт.'
+        return result
 
 
 class Product:
     name: str  # название товара
     description: str  # описание товара
-    price:  float  # цена товара
+    price: float  # цена товара
     quantity: int  # количество в наличии
-    quantity_of_product = 0
+    quantity_of_product = 0  # счетчик количества продуктов
 
     def __init__(self, name, description, price, quantity):
         self.name = name
         self.description = description
-        self.price = price
+        self.__price = price
         self.quantity = quantity
-        self.amount_available = quantity
+        self.amount_available = quantity  # доступное количество
         Product.quantity_of_product += 1
+
+    def __repr__(self):
+        return f'{self.name}, {self.description}, {self.__price}, {self.quantity}'
+
+    @classmethod
+    def add_product(cls, new_product):
+        """
+        класс-метод для добавления нового товара
+        :param new_product: str
+        :return:
+        """
+        return cls(**new_product)
+
+    @property
+    def price(self):  # геттер для установки цены
+        return self.__price
+
+    @price.setter
+    def price(self, new_price):  # сеттер для изменения цены
+        """
+        сеттер если цена <= 0 то "введена некорректная цена" иначе вывод цены
+        :param new_price: float
+        :return: float
+        """
+        if new_price <= 0:
+            print ("Введена некорректная цена")
+        else:
+            self.__price = new_price
+
+    class CategoryIter:
+
+        def __init__(self, category: Category):
+            self.category = category
+            self.index = 0
+
+
+        def __iter__(self):
+            return self
+
+        def __next__(self):
+            if self.index >= len(self.category.display):
+                raise StopIteration
+            else:
+                product = self.category.display[self.index]
+                self.index += 1
+                return product
+
+    category = Category("Категория1", "qwerty")
+    product = Product("Продукт1", "йцукен", 18000,  5)
+    product1 = Product(name: "Продукт2", description: "йцукен", price: 12000, quantity: 2)
+    category.add_products(product1)
+    category.add_products(product)
+
+
