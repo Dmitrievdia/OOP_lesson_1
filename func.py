@@ -23,16 +23,13 @@ class Category:
     description: str  # описание категории
     products: list  # товары
     quantity_of_categories = 0  # счетчик категорий
-    own_products = set()  # счетчик уникальных продуктов
 
-
-
-    def __init__(self, name, description, products):
+    def __init__(self, name, description):
         self.name = name
         self.description = description
         self.__products = []  # список продуктов делаем приватным
         Category.quantity_of_categories += 1
-        Category.own_products += len(self.__products)
+        Category.all_quantity_category += len(self.__products)
 
     def add_products(self, product):
         """
@@ -41,7 +38,6 @@ class Category:
         :return: list ['Samsung s-23']
         """
         self.__products.append(product)
-
 
     @property
     def display(self):
@@ -119,17 +115,15 @@ class Product:
         :return: float
         """
         if new_price <= 0:
-            print ("Введена некорректная цена")
+            print("Введена некорректная цена")
         else:
             self.__price = new_price
-
 
     class CategoryIter:
 
         def __init__(self, category: Category):
             self.category = category
             self.index = 0
-
 
         def __iter__(self):
             return self
@@ -142,11 +136,13 @@ class Product:
                 self.index += 1
                 return product
 
-    # category = Category("Категория1", "qwerty")
-    # product = Product("Продукт1", "йцукен", 18000,  5)
-    # product1 = Product(name: "Продукт2", description: "йцукен", price: 12000, quantity: 2)
-    # category.add_products(product1)
-    # category.add_products(product)
+
+category = Category("Категория1", "qwerty")
+product = Product("Продукт1", "йцукен", 18000, 5)
+product1 = Product("Продукт2", "йцукен", 12000, 77)
+category.add_products(product1)
+category.add_products(product)
 
 
-
+print(product)
+print(product1)
