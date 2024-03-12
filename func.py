@@ -1,35 +1,17 @@
-import json
-from typing import List, Any
-
-
-# get_data_products = "products.json"
-#
-#
-# def load_data_products():
-#     """
-#     функция выводит список словарей продуктов:
-#     :return:list
-#     """
-# with open(get_data_products, "rt", encoding="utf-8") as file:
-#     data_products = json.load(file)
-# return data_products
-# print(load_data_products())
-
-
 class Category:
     all_quantity_category = 0  # общее количество всех категорий
     all_quantity_unique_product = 0  # количество уникальных продуктов
     name: str  # название категории
     description: str  # описание категории
     products: list  # товары
-    quantity_of_categories = 0  # счетчик категорий
+    # quantity_of_categories = 0  # счетчик категорий
 
     def __init__(self, name, description):
         self.name = name
         self.description = description
         self.__products = []  # список продуктов делаем приватным
-        Category.quantity_of_categories += 1
-        Category.all_quantity_category += len(self.__products)
+        Category.all_quantity_category += 1
+        Category.all_quantity_unique_product += len(self.__products)
 
     def add_products(self, product):
         """
