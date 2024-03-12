@@ -142,11 +142,11 @@ class Product:
                 self.index += 1
                 return product
 
-    category = Category("Категория1", "qwerty")
-    product = Product("Продукт1", "йцукен", 18000,  5)
-    product1 = Product(name: "Продукт2", description: "йцукен", price: 12000, quantity: 2)
-    category.add_products(product1)
-    category.add_products(product)
+    # category = Category("Категория1", "qwerty")
+    # product = Product("Продукт1", "йцукен", 18000,  5)
+    # product1 = Product(name: "Продукт2", description: "йцукен", price: 12000, quantity: 2)
+    # category.add_products(product1)
+    # category.add_products(product)
 
 
 
