@@ -119,23 +119,6 @@ class Product:
         else:
             self.__price = new_price
 
-    class CategoryIter:
-
-        def __init__(self, category: Category):
-            self.category = category
-            self.index = 0
-
-        def __iter__(self):
-            return self
-
-        def __next__(self):
-            if self.index >= len(self.category.display):
-                raise StopIteration
-            else:
-                product = self.category.display[self.index]
-                self.index += 1
-                return product
-
 
 category = Category("Категория1", "qwerty")
 product = Product("Продукт1", "йцукен", 18000, 5)
