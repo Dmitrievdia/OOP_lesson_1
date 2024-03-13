@@ -15,17 +15,26 @@ class Category:
 
     def add_products(self, product):
         """
-        функция добавления продукта в список также данный метод считает итоговое количество всех продуктов в сумме
+        функция добавления продукта в список
         :param product: str (Samsung s-23)
         :return: list ['Samsung s-23']
         """
-        for item in self.__products:
-            if item[0] == product.name:  # Проверяем наименование товара есть ли в списке продуктов
-                item[3] += product.quantity  # Обновляем количество товаров в продукте который уже есть
-                break
-            else:
-                self.__products.append([product.name, product.description, product.price, product.quantity])
-                Category.all_quantity_unique_product += 1
+        # for item in self.__products:
+        #     if item[0] == product.name:  # Проверяем наименование товара есть ли в списке продуктов
+        #         item[3] += product.quantity  # Обновляем количество товаров в продукте который уже есть
+        #         break
+        #     else:
+        #         self.__products.append([product.name, product.description, product.price, product.quantity])
+        #         Category.all_quantity_unique_product += 1
+        return self.__products.append([product])
+
+    # @property
+    # def counting_products(self):
+    #     count = 0
+    #     for i in self.__products:
+    #         count += i[3]
+    #
+    #     return count
 
     @property
     def display(self):
@@ -116,7 +125,7 @@ class Product:
 
     def __str__(self):
         # Добавлено строковое отображение
-        return f'Название продукта: {self.name}, {self.__price} руб. Остаток: {self.quantity} шт.'
+        return f'\n{self.name}, {self.__price} руб. Остаток: {self.quantity} шт.'
 
 
 if __name__ == '__main__':
@@ -145,14 +154,14 @@ if __name__ == '__main__':
 
     category_1.add_products(product_1)  # Добавление продукта в приватный список товаров
     category_1.add_products(product_2)  # Добавление продукта в приватный список товаров
-    print(category_1.add_products)
+    # print(category_1.add_products)
 
     product_3 = Product('iPhone', 'smth', 130_000, 34)
     category_1.add_products(product_3)  # Добавление продукта в приватный список товаров если такой продукт существует
-    print(category_1.add_products)  # Отображение приватного списка товаров
+    # print(category_1.add_products)  # Отображение приватного списка товаров
 
-    print(f'\nУникальных продуктов: {category_1.all_quantity_unique_product}')  # Кол-во уник-х товаров в прив. списке
-    print(category_1.get_products)  # Получение перечня товаров в определенном формате
-    print(str(category_1))  # Отображение строкового представления
+    # print(f'\nУникальных продуктов: {category_1.all_quantity_unique_product}')  # Кол-во уник-х товаров в прив. списке
+    # print(category_1.get_products)  # Получение перечня товаров в определенном формате
+    # print(str(category_1))  # Отображение строкового представления
 
-    print(f'Общее количество продуктов категории: {category_1.all_quantity_unique_product}')
+    # print(f'Общее количество продуктов категории: {category_1.all_quantity_unique_product}')
